@@ -5,12 +5,15 @@ from selenium.common.exceptions import NoSuchElementException
 import catahelper
 import pygsheets
 
+#authorization
+gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
+
 # set up webdriver
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--incognito')
 options.add_argument('--headless')
-driver = webdriver.Chrome("/Users/americancultures/Downloads/chromedriver", options=options)
+driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver", options=options)
 
 main_url = "https://classes.berkeley.edu/search/class?f%5B0%5D=" \
            "im_field_term_name%3A851&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures"
@@ -27,7 +30,7 @@ while True:
     urls[str(page_number)] = str(driver.current_url)
     page_number += 1
 
-print(urls)  # prints all urls from search results
+# print(urls)  # prints all urls from search results
 
 courses_split = []
 instructor_list = []
@@ -40,8 +43,9 @@ yrs = []
 
 writer = pd.ExcelWriter('/Users/americancultures/Desktop/coursescatalogue.xlsx', engine='xlsxwriter')
 
-gc = pygsheets.authorize(service_file='/Users/americancultures/')
-
+#open the sheet
+file = gc.open('AC Classes List')
+sheet = file[0]  # selects the first sheet
 
 
 # create a new sheet for every semester
@@ -89,7 +93,7 @@ def write_sheet(year):
     df2.to_excel(writer, sheet_name=year)
 
     print(df2)  # check
-    writer.save()
+    return df2
 
 
 # use catahelper to go through each page
@@ -113,4 +117,7 @@ for page in urls:
         # courses_split = []
         # instructor_list = []
 
-write_sheet(yr)
+# update sheet on google drive
+sheet.title = yr
+sheet.set_dataframe(write_sheet(yr), (1, 1))
+

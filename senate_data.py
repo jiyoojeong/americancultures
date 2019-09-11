@@ -1,9 +1,13 @@
+import googleapiclient
 import pandas as pd
 import requests
-import re
 import numpy as np
 from bs4 import BeautifulSoup
+import pygsheets
 
+
+# authorization
+gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
 
 url = "https://academic-senate.berkeley.edu/committees/amcult/approved-berkeley"
 names = {"DeluganC12AC":"Delugan\nC12AC", "Rosenbaum133AC":"Rosenbaum\n133AC"}  # formatting err cases
@@ -126,8 +130,24 @@ print("finished reformatting. writing into xlsx file")
 
 writer = pd.ExcelWriter('/Users/americancultures/Desktop/senate.xlsx', engine='xlsxwriter')
 
+#open the sheet
+file = gc.open('Senate Approved AC Instructors')
+sheet_index = 0
+
+
 # for every department, create a data spreadsheet
 for dept in depts:
+    if sheet_index == 0:
+        print(dept + "first")
+        sheet = file[sheet_index]  # selects the first sheet
+
+    else:
+        print(dept)
+        try:
+            sheet = file.add_worksheet(dept)
+        except googleapiclient.errors.HttpError:
+            sheet = file[sheet_index]
+    sheet.title = dept
     matrix = depts[dept]
     instructors = matrix[:, 1]
     data_dict = {'Class': matrix[:, 0], 'instructors': instructors}
@@ -140,9 +160,12 @@ for dept in depts:
     df2.columns = lis
     df = pd.DataFrame({'Class': data_dict['Class']})
     df2.insert(0, "Course Number",  data_dict['Class'])
-    df2.to_excel(writer, sheet_name=dept)
-    print(df2)
 
-writer.save()
+    sheet.set_dataframe(df2, (1, 1))
+    sheet_index = sheet_index + 1
+
+    # print(df2)
+
+
 
 

@@ -1,11 +1,7 @@
 import pandas as pd
-import requests
-import re
-import numpy as np
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import argparse
-
 
 # takes in url, outputs arrays courses[dept, course number], instructors[], and string year-semester
 def main(url):
@@ -14,7 +10,7 @@ def main(url):
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
     options.add_argument('--headless')
-    driver = webdriver.Chrome("/Users/americancultures/Downloads/chromedriver", options=options)
+    driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver", options=options)
 
     driver.get(url)
     test_a = driver.find_element_by_class_name("ls-instructors")

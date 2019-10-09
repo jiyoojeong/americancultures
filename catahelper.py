@@ -3,6 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+
 # takes in url, outputs arrays courses[dept, course number], instructors[], and string year-semester
 def main(url):
     # setting up webscraping driver
@@ -41,6 +42,7 @@ def main(url):
 
     # organizing courses from a page
     classes_list = soup.findAll("span", "ls-section-name")
+    dept_list = soup.findAll("a", target="_blank")
     section = soup.findAll("span", "ls-section-count")
     # print("len section" + str(len(section)))
     # print(section)
@@ -86,6 +88,17 @@ def main(url):
             tot.pop(-1)
 
     courses = [i[0] for i in courses]
+
+    # creating dictionary of departments
+    for d in dept_list:
+        d = d.get_text()
+        d.strip()
+        if d in dept_
+        print(d)
+        print("new")
+
+
+    dept_dict = {}
 
     # testing section by printing
 

@@ -5,7 +5,8 @@ from selenium.common.exceptions import NoSuchElementException
 import catahelper
 import pygsheets
 
-#authorization
+
+# authorization
 gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
 
 # set up webdriver
@@ -43,7 +44,7 @@ yrs = []
 
 writer = pd.ExcelWriter('/Users/americancultures/Desktop/coursescatalogue.xlsx', engine='xlsxwriter')
 
-#open the sheet
+# open the sheet
 file = gc.open('AC Classes List')
 sheet = file[0]  # selects the first sheet
 

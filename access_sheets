@@ -1,0 +1,46 @@
+import pandas as pd
+import pygsheets
+
+
+def access():
+    # authorization
+    gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
+
+    file_name_1 = "AC Classes List"
+    file_name_2 = "Senate Approved AC Instructors"
+
+    # courses
+    f1 = gc.open(file_name_1)
+    wk = f1[0]
+    data = wk.get_all_values()
+    headers = data.pop(0)
+    courses = pd.DataFrame(data, columns=headers)
+
+    # senate
+    f2 = gc.open(file_name_2)
+    depts = {}  # list of data frames with instructors based on departments.
+    i = 0
+    for s in f2:
+        wk = f2[i]
+        i = i + 1
+        data = wk.get_all_values()
+        headers = data.pop(0)
+        instructors = pd.DataFrame(data, columns=headers)
+        depts[wk.title] = instructors
+
+    return courses, depts
+
+
+courses, departments = access()
+
+dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
+             "AMERSTD":"AMERICAN STUDIES",
+             "ANTHRO": "ANTHROPOLOGY",
+             'CYPLAN': "ARCHITECTURE",
+             'ARCH': "ARCHITECTURE",
+
+             }
+#  for every course in course list, get the department, cross check with the dictionary of departments
+
+
+

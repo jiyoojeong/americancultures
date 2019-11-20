@@ -1,7 +1,6 @@
 import pandas as pd
 import pygsheets
 
-
 def access():
     # authorization
     gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
@@ -14,7 +13,7 @@ def access():
     wk = f1[0]
     data = wk.get_all_values()
     headers = data.pop(0)
-    courses = pd.DataFrame(data, columns=headers)
+    classes = pd.DataFrame(data, columns=headers)
 
     # senate
     f2 = gc.open(file_name_2)
@@ -23,24 +22,74 @@ def access():
     for s in f2:
         wk = f2[i]
         i = i + 1
-        data = wk.get_all_values()
-        headers = data.pop(0)
-        instructors = pd.DataFrame(data, columns=headers)
-        depts[wk.title] = instructors
+        d_rows = wk.get_all_records()
+        # print(wk.title)
+        depts[wk.title.strip()] = d_rows
 
-    return courses, depts
+    return classes, depts
 
 
-courses, departments = access()
+def close_ish(string1, string2):
+    # checks if string 1 is similar to string 2
+    if string1 in ["COLWRIT", ]
 
-dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
+
+def main():
+    # get data from google sheets
+    courses, departments = access()
+
+    dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
              "AMERSTD":"AMERICAN STUDIES",
              "ANTHRO": "ANTHROPOLOGY",
-             'CYPLAN': "ARCHITECTURE",
              'ARCH': "ARCHITECTURE",
+             'ART': "ART PRACTICE",
+             'ARTHIST': "ART HISTORY",
+             'ANTHRO': "ANTHROPOLOGY",
+             'ASAMST': "ASIAN AMERICAN STUDIES",
+             'UGBA': "BUSINESS ADMINISTRATION (UGBA)",
+             'CHICANO': "CHICANO STUDIES",
+             'CYPLAN': "CITY AND REGIONAL PLANNING",
+             'COLWRIT': "COLLEGE WRITING",
+             'COMPLIT': "COMPARATIVE LITERATURE",
+             'DEMOG': "DEMOGRAPHY",
+             'TDPS': "",
+             'DUTCH': "DUTCH STUDIES",
+             'EPS': "EARTH AND PLANETARY SCIENCE",
+             'EDUC': "EDUCATION",
+             'ENGIN': "ENGINEERING",
+             'ENGLISH': "ENGLISH",
+             'ENVECON': "ENVIRONMENTAL ECONOMICS",
+             'ESPM': "ENVIRONMENTAL SCIENCE, POLIC...",
+             'ETHSTD': "ETHNIC STUDIES",
+             'FILM': "FILM STUDIES",
+             'FRENCH': "FRENCH",
+             'GEOG': "GEOGRAPHY",
+             'GWS': "GENDER & WOMEN'S STUDIES (fo...",
+             'LGBT': "LGBT",
+             'GPP': "GLOBAL PROVERTY AND PRACTICE",
+             'HISTORY': "HISTORY",
+             'HUMAN BIODYNAMICS': "HUMAN BIODYNAMICS",  # MAY NEED ADJUSTMENT
+             'INFO': "INFORMATION (formerly INFORM...",
+             'INTEGBI': "INTEGRATIVE BIOLOGY",
+             'INTERDEPARTMENTAL STUDIES': "INTERDEPARTMENTAL STUDIES",  # MAY NEED ADJUSTMENT
+             'UNDERGRADUATE INTERDISCIPLINATRY STUDIES': "INTERDISCIPLINARY STUDIES"
+             }  # may not be needed.
 
-             }
-#  for every course in course list, get the department, cross check with the dictionary of departments
+    #  for every course in course list, get the department, cross check with the dictionary of departments
+
+    c_departments = courses["Department_FULL"]
+    # testing that we're getting full names of the departments
+    print(c_departments[0])
+    print(departments)
+
+    # loop through each row, check that the instructors are on the senate list.
+    print(len(courses))
+    for c in range(0, len(c_departments)):
+        d_i = c_departments[c]
+        print(d_i)
+
+        s_d = departments[d_i]
+        print(s_d)
 
 
-
+main()

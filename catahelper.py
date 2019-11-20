@@ -42,7 +42,10 @@ def main(url):
 
     # organizing courses from a page
     classes_list = soup.findAll("span", "ls-section-name")
-    dept_list = soup.findAll("a", target="_blank")
+
+    dept_list = soup.findAll("span", "ls-section-dept")
+
+    # dept_list = soup.findAll("a", target="_blank")
     section = soup.findAll("span", "ls-section-count")
     # print("len section" + str(len(section)))
     # print(section)
@@ -54,9 +57,18 @@ def main(url):
         section.pop(0)
         courses.append([c, section.pop(0).get_text()])
 
+    dept_stripped = []
+    # creating dictionary of departments
+    for d in dept_list:
+        d = d.get_text()
+        d.strip()
+        d = d[16:]
+        d = d.upper()
+        dept_stripped.append(d)
+        # print(d)
+        # print("new")
+
     # filtering through duplicates
-    # print(courses)
-    # print(instructor_list)
     i = 0
     while i < len(courses) - 1:
         name1 = courses[i][0]
@@ -66,10 +78,12 @@ def main(url):
 
         if name1 == name2 and courses[i][1] == courses[i+1][1]:
             courses.pop(i)
+            dept_stripped.pop(i)
             # duplicates within html file - example: two section 001s
         elif name1 == name2 and instructor_list[i] == instructor_list[i+1]:
             # print("dupe")
             courses.pop(i)
+            dept_stripped.pop(i)
             instructor_list.pop(i)
             # duplicate course sections 001, 002, etc.
         else:
@@ -80,25 +94,21 @@ def main(url):
     for i in tot:
         if courses[i][0] == courses[i+1][0] and len(instructor_list) < len(courses):
             # duplicate course sections, no instructor recorded.
-            # print("NO INST")
+            print("NO INST")
             # print(courses)
             # print(instructor_list)
             courses.pop(i)
+            dept_stripped.pop(i)
             i -= 1
             tot.pop(-1)
+        elif len(instructor_list) < len(courses):
+            instructor_list.append("NA")
 
     courses = [i[0] for i in courses]
 
-    # creating dictionary of departments
-    for d in dept_list:
-        d = d.get_text()
-        d.strip()
-        if d in dept_
-        print(d)
-        print("new")
 
 
-    dept_dict = {}
+
 
     # testing section by printing
 
@@ -113,7 +123,7 @@ def main(url):
         # print("---c ends----")
         courses_split.append(c.split())
 
-    # print("courses split" + str(courses_split))
+    print("courses split" + str(courses_split))
 
-    return courses_split, instructor_list, yr
+    return courses_split, instructor_list, yr, dept_stripped
 

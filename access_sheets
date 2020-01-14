@@ -1,6 +1,7 @@
 import pandas as pd
 import pygsheets
 
+
 def access():
     # authorization
     gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
@@ -29,18 +30,24 @@ def access():
     return classes, depts
 
 
-def close_ish(string1, string2):
+def in_dict(string1):
     # checks if string 1 is similar to string 2
-    if string1 in ["COLWRIT", ]
+    keys = dept_dict_inv.keys()
+    values = dept_dict_inv.values()
+    if string1 in keys:
+        print("in longer")
+        return "L"
+    elif string1 in values:
+        print("in shorter")
+        return "S"
+    else:
+        print("not in dictionary")
+        return "NONE"
 
 
-def main():
-    # get data from google sheets
-    courses, departments = access()
-
-    dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
-             "AMERSTD":"AMERICAN STUDIES",
-             "ANTHRO": "ANTHROPOLOGY",
+synonyms = {"LINGUIS"}
+dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
+             "AMERSTD": "AMERICAN STUDIES",
              'ARCH': "ARCHITECTURE",
              'ART': "ART PRACTICE",
              'ARTHIST': "ART HISTORY",
@@ -75,21 +82,38 @@ def main():
              'UNDERGRADUATE INTERDISCIPLINATRY STUDIES': "INTERDISCIPLINARY STUDIES"
              }  # may not be needed.
 
+dept_dict_inv = {v: k for k, v in dept_dict.items()}
+
+
+def main():
+    # get data from google sheets
+    courses, departments = access()
     #  for every course in course list, get the department, cross check with the dictionary of departments
 
-    c_departments = courses["Department_FULL"]
+    dept_names_long = courses["Department_FULL"]
+    dept_names_short = courses["Department"]
+
     # testing that we're getting full names of the departments
-    print(c_departments[0])
+    print(dept_names_long[0])
     print(departments)
 
     # loop through each row, check that the instructors are on the senate list.
     print(len(courses))
-    for c in range(0, len(c_departments)):
-        d_i = c_departments[c]
+    for c in range(0, len(dept_names_long)):
+        d_i = dept_names_long[c]
         print(d_i)
+        in_d = in_dict(d_i)
+        if in_d == "L":
+            s = departments[d_i]
+            print(s)
+        elif in_d == "S":
+            key = dept_dict_inv[d_i]
+            print(key)
+            s = departments[key]
+            print(s)
+        else:
+            print("check for errs")
 
-        s_d = departments[d_i]
-        print(s_d)
 
 
 main()

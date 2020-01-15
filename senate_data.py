@@ -87,6 +87,7 @@ def separate(bits, c):
 
 print("begin restructure of drop content")
 dept_stripped_copy = dept_stripped
+dept_stripped_copy.remove("LIBRARY AND INFORMATION STUD...")
 for d in drop_content:
     s = d.get_text()
     s = s.replace(u'\xa0', u' ')
@@ -125,12 +126,12 @@ for d in drop_content:
     # print("master " + str(master))
 
 # print(classes_stripped)
-# print(depts)
+# print(depts.keys())
 print("finished reformatting. writing into xlsx file")
 
 writer = pd.ExcelWriter('/Users/americancultures/Desktop/senate.xlsx', engine='xlsxwriter')
 
-#open the sheet
+# open the sheet
 file = gc.open('Senate Approved AC Instructors')
 sheet_index = 0
 

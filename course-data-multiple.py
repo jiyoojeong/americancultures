@@ -99,7 +99,7 @@ def write_sheet(year):
     return df2
 
 
-# use catahelper to go through each page
+# use cata-helper to go through each page
 for page in urls:
     print("running page " + page)
 

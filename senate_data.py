@@ -7,8 +7,6 @@ import pygsheets
 import time as time
 import signal
 import re
-import lxml.html
-import lxml.html.clean
 
 
 # === TIMEOUT HANDLER === #
@@ -20,8 +18,8 @@ def handler(signum, frame):
 signal.signal(signal.SIGALRM, handler)
 signal.alarm(45)
 
+# ==== HELPER FUNCTIONS ==== #
 
-# ==== SIDE FUNCTIONS ==== #
 
 # takes in a @param 'url' string url to the senate data page.
 # It will set up google authorization and the webdriver to scrape data.
@@ -73,7 +71,6 @@ def scrape(res):
 
 # takes in @param content (which is the scraped items in the list, drop-content
 # gets the text and removes all special characters.
-#
 def clean(d):
     s = d.get_text()
     # print("original s: " + s)
@@ -146,6 +143,7 @@ def separate(bits, c):
 
 
 # Writes in the @param 'df' dataframe of cleaned pandas data into the google sheet.
+# does not return anything.
 def write_new_file(filename, gc, depts):
     # open the sheet
     file = gc.open(filename)

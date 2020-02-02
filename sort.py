@@ -270,6 +270,7 @@ for dept in current_table:
 
 
 # === WHOLE table represents approved courses === #
+
 cur.execute('''CREATE TABLE whole AS
                 SELECT c.*
                 FROM courses AS c

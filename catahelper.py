@@ -126,4 +126,3 @@ def main(url):
     print("courses split" + str(courses_split))
 
     return courses_split, instructor_list, yr, dept_stripped
-

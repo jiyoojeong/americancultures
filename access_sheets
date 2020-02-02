@@ -164,6 +164,11 @@ def main():
     # loop through each row, check that the instructors are on the senate list.
     for c in range(0, len(dept_names_full)):
         dept_name = dept_names_full[c]
+        # ETHNIC STUDIES SPECIAL CASE: check senate department of the following dictionaries instead of the regular one.
+        if dept_name == "ETHNIC_STUDIES" and dept_names_short[c] != "ETHSTD":
+            best_name = dept_dict[dept_names_short[c]]
+            courses.at[c, 'Department_FULL'] = best_name
+
         if dept_name != '':
             # print("-------course dept name: " + dept_name)
 
@@ -196,14 +201,18 @@ def main():
     courses.columns = [c.replace(' ', '_') for c in courses.columns]
 
     courses.to_csv('data/{}_{}_{}_access.csv'.format(now.year, now.month, now.day))
+
     senate_names = []
     for s in senate:
-        stitle= re.sub(r'\s', '_', s)
+        stitle = re.sub(r'\s', '_', s)
         stitle = re.sub(r'[^_|A-Z0-9]', '', stitle)
+        print(stitle)
+        # cols = senate[s].keys()
+        # print(cols)
         senate_names.append(stitle)
-        d = pd.DataFrame(senate[s], columns=senate[s].pop(0))
+        d = pd.DataFrame(senate[s])
         d.columns = [c.replace(' ', '_') for c in d.columns]
-        d.to_csv('data/senate/{}.csv'.format(s))
+        d.to_csv('data/senate/{}.csv'.format(stitle))
     # WRITE csv of all the senate names.
     print(senate_names)
     with open('data/senate/_department_names.csv', 'w', newline='') as f:

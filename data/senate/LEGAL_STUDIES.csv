@@ -1,10 +1,10 @@
 ,Course_Number,Instructor_1,Instructor_2,Instructor_3
-0,19AC,Jonathan_Simon,NA,NA
-1,104AC,Calvin_Morrill_and_Michael_Musheno,Elizabeth_Brown,NA
-2,132AC,Leti_Volpp,Pratheepen_Gulasekaram,Carrie_Rosenbaum
-3,133AC,Kathy_Abrams,NA,NA
-4,152AC,Keith_Hiatt162AC_Mary_Louise_Frampton_and_Kathy_Abrams,NA,NA
-5,173AC,Christopher_Tomlins,NA,NA
-6,185AC,Jonathan_Simon,NA,NA
-7,185AC,Keith_Feldman,Tina_Sacks,Jonathan_Simon
-8,190AC,Mary_Louise_Frampton_and_Kathy_Abrams,NA,NA
+0,19AC,"Jonathan, NA, Simon","NA, NA, NA","NA, NA, NA"
+1,104AC,"Calvin, Morrill and Michael, Musheno","Elizabeth, NA, Brown","NA, NA, NA"
+2,132AC,"Leti, NA, Volpp","Pratheepen, NA, Gulasekaram","Carrie, NA, Rosenbaum"
+3,133AC,"Kathy, NA, Abrams","NA, NA, NA","NA, NA, NA"
+4,152AC,"Keith, Hiatt162AC Mary Louise Frampton and Kathy, Abrams","NA, NA, NA","NA, NA, NA"
+5,173AC,"Christopher, NA, Tomlins","NA, NA, NA","NA, NA, NA"
+6,185AC,"Jonathan, NA, Simon","NA, NA, NA","NA, NA, NA"
+7,185AC,"Keith, NA, Feldman","Tina, NA, Sacks","Jonathan, NA, Simon"
+8,190AC,"Mary, Louise Frampton and Kathy, Abrams","NA, NA, NA","NA, NA, NA"

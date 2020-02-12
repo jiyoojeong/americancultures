@@ -74,6 +74,12 @@ def clean(d):
         print('changing err')
         s = re.sub(r'm133AC', 'm\n133AC', s)
         print(s)
+    # adjust Karina Palau and Carol Sholl
+    if s.find("lW60AC") != -1:
+        print('changing err')
+        s = re.sub(r'lW60AC', 'l\nW60AC', s)
+        print(s)
+
 
     # remove all parenthetical notes.
     s = re.sub(r'\(.+\)', '', s)
@@ -177,6 +183,7 @@ def write_new_file(filename, gc, depts):
         df2.insert(0, "Course Number", df['Class'])
 
         try:
+            sheet.clear()
             sheet.set_dataframe(df2, (1, 1))
             for i in range(1, 2):
                 time.sleep(1)
@@ -184,7 +191,7 @@ def write_new_file(filename, gc, depts):
             print("timeout error.")
 
         sheet_index = sheet_index + 1
-        print(df2)
+        # print(df2)
 
 
 # ===== MAIN ===== #
@@ -208,6 +215,7 @@ def main():
     print("begin restructure of drop content")
 
     for d in drop_content:
+        # print(d)
         plist = clean(d)
         print(plist)
         depts[dept_stripped.pop(0)] = plist
@@ -219,8 +227,8 @@ def main():
     try:
         write_new_file(filename, gc, depts)
     except:
-        write_new_file(filename, gc, depts)
         print("file already exists. update " + filename + " instead.")
+        write_new_file(filename, gc, depts)
 
 
 # ==== RUN MAIN ==== #

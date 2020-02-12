@@ -7,7 +7,7 @@ import pygsheets
 import csv
 
 # authorization
-gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
+gc = pygsheets.authorize(service_file="client_secret.json")
 
 # set up webdriver
 options = webdriver.ChromeOptions()
@@ -16,8 +16,7 @@ options.add_argument('--incognito')
 options.add_argument('--headless')
 driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver", options=options)
 
-main_url = "https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%" \
-           "3A865&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures"
+main_url = "https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A1174&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures"
 
 driver.get(main_url)
 urls = {'1': main_url}
@@ -46,6 +45,25 @@ yrs = []
 # open the sheet
 file = gc.open('AC Classes List')
 sheet = file[0]  # selects the first sheet
+
+
+# create a new sheet for every semester
+def write_new_sheet(year):
+    # col 1 dept, col 2 course num, col 3-n all instructors
+
+    data_dict = {"Department": [i[0] for i in courses_split], "Course Number": [i[1] for i in courses_split],
+                 "Instructors": instructor_list}
+
+    # print("dept:" + " len = " + str(len(data_dict["Department"])) + " " + str(data_dict["Department"]))
+    # print("numb:" + " len = " + str(len(data_dict["Course Number"])) + " " + str(data_dict["Course Number"]))
+    # print("inst:" + " len = " + str(len(data_dict["Instructors"])) + " " + str(data_dict["Instructors"]))
+    df = pd.DataFrame(data_dict)
+    df2 = df.Instructors.apply(pd.Series)  # separates instructors
+
+    df2.insert(0, "Course Number", data_dict['Course Number'])
+    df2.insert(0, "Department", data_dict['Department'])
+
+    print(df2)  # check
 
 
 # create a new sheet for every year
@@ -84,23 +102,25 @@ for page in urls:
     courses_split.extend(helper_course)
     instructor_list.extend(helper_instructors)
     depts.extend(helper_depts)
-
-    if yr != helper_yr:
-        # print("yr change")
-        yrs.append(helper_yr)
-        # write_new_sheet(helper_yr)
+    try:
+        yr = helper_yr[:19]
+    except:
         yr = helper_yr
-        courses_split = []
-        instructor_list = []
-    else:
-        wow = 2
-        # courses_split = []
-        # instructor_list = []
+    print(courses_split)
+    print(instructor_list)
 
 # update sheet on google drive
-sheet.title = yr
+
 with open('data/current_data_sem_year.csv', 'w') as f:
     writer = csv.writer(f)
     writer.writerow([yr])
 print("process completed.")
+
+try:
+    sheet = file.add_worksheet(yr)
+except:
+    print('sheet exists')
+    sheet = file.worksheet_by_title(yr)
+    sheet.clear()
+
 sheet.set_dataframe(write_sheet(yr), (1, 1))

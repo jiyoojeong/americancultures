@@ -1,6 +1,6 @@
 ,Course_Number,Instructor_1,Instructor_2,Instructor_3
-0,117AC,David_Kirp,Jane_Mauldon_and_Michael_Trevio,Erika_Weissinger
-1,180,David_Kirp,NA,NA
-2,189,Phyllis_Green,NA,NA
-3,190AC,Amy_Lerman,NA,NA
-4,192AC,Saru_Jayaraman,NA,NA
+0,117AC,"David, NA, Kirp","Jane, Mauldon and Michael, Trevio","Erika, NA, Weissinger"
+1,180,"David, NA, Kirp","NA, NA, NA","NA, NA, NA"
+2,189,"Phyllis, NA, Green","NA, NA, NA","NA, NA, NA"
+3,190AC,"Amy, NA, Lerman","NA, NA, NA","NA, NA, NA"
+4,192AC,"Saru, NA, Jayaraman","NA, NA, NA","NA, NA, NA"

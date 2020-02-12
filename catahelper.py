@@ -50,11 +50,44 @@ def main(url):
     # print("len section" + str(len(section)))
     # print(section)
     # print("len classes" + str(len(classes_list)))
+
+    classes_list = []
+    dept_list = []
+    section = []
+    names_list = []
+
+    # === TRYING NEW CODE === #
+    search_res = soup.findAll('div', 'col-wrapper')
+    for sr in search_res:
+        classes_list.append(sr.find("span", "ls-section-name"))
+        dept_list.append(sr.find("span", "ls-section-dept"))
+        section.append(sr.find("span", "ls-section-count"))
+        names_list.append(sr.findAll("div",  "ls-instructors"))
+
+    # print(names_list)
+    instructor_list = []
+    for t in names_list:
+        # print("-----new t------")
+        # print(t)
+        if not t:
+            instructor_list.append(["NA"])
+        else:
+            for r in t:
+                b = r.get_text()
+                try:
+                    ls = b.replace('\n', '')
+                    ls = ls.split(',')
+                except:
+                    ls = [b.replace('\n', '')]
+                instructor_list.append(ls)
+    # print("~~~~~~~~~~ INSTRUCTOR LIST ~~~~~~~~")
+    # print(instructor_list)
+    # print(section)
+
     courses = []
     for c in classes_list:
         c = c.get_text()
         c.strip()
-        section.pop(0)
         courses.append([c, section.pop(0).get_text()])
 
     dept_stripped = []
@@ -62,6 +95,7 @@ def main(url):
     for d in dept_list:
         d = d.get_text()
         d.strip()
+        # print(d)
         d = d[16:]
         d = d.upper()
         dept_stripped.append(d)
@@ -101,19 +135,15 @@ def main(url):
             dept_stripped.pop(i)
             i -= 1
             tot.pop(-1)
-        elif len(instructor_list) < len(courses):
-            instructor_list.append("NA")
+        if len(instructor_list) < len(courses):
+            instructor_list.insert(i, "NA")
 
     courses = [i[0] for i in courses]
 
-
-
-
-
     # testing section by printing
 
-    # print('Courses     ' + str(courses))
-    # print('Instructors ' + str(instructor_list))
+    print('Courses     ' + str(courses))
+    print('Instructors ' + str(instructor_list))
 
     # restructuring courses
     courses_split = []

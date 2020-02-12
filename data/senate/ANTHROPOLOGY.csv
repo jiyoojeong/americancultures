@@ -1,19 +1,19 @@
-,Course_Number,Instructor_1,Instructor_2,Instructor_3,Instructor_4,Instructor_5,Instructor_6,Instructor_7,Instructor_8,Instructor_9,Instructor_10,Instructor_11,Instructor_12,Instructor_13
-0,XB2AC,Kim_Christensen,Rob_Cuthrell,Annelise_Morris,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-1,XB3AC,Gisele_Bousquet,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-2,2AC,Kent_Lightfoot,Meg_Conkey,Katherine_Howlett_Hayes,Andy_Roddick,Lee_Panich,Kim_Christensen,James_Flexner,John_Chenoweth,Christine_Hastorf,Jun_Sunseri,Kristen_Vacca,NA,NA
-3,3AC,Gerald_Berreman,Aihwa_Ong,Kevin_Karpiak,Sholey_Shahrokhi,Nancy_ScheperHughes,Brad_Erickson,Arpita_Roy,M_Mather_George,James_Holston,Lawrence_Cohen,Charles_Hirschkind,Brian_Karl,Julia_Morris
-4,10AC,William_Simmons,Kent_Lightfoot,C_Richard_Hitchcock,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-5,XB10AC,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-6,11AC,Stanley_Brandes,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-7,12AC,Gerald_Berreman,Robin_Maria_DeluganC12AC_Kent_Lightfoot,Scott_Stephens,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-8,121AC,Laurie_Wilkie,Stacy_Kozakavich,Teresa_Bulger,Annelise_Morris,Katrina_Eichner,NA,NA,NA,NA,NA,NA,NA,NA
-9,121B,James_Deetz,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-10,124AC,Patrick_Kirch,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-11,153AC,John_Ogbu,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-12,160AC,Charles_Briggs,JoAnn_Conrad,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-13,162AC,JoAnn_Conrad_and_Charles_Briggs,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-14,163AC,Alan_Dundes,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-15,172,Jack_Potter,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-16,172AC,John_Ogbu,Aihwa_Ong,Philippe_Bourgois,Robin_Maria_Delugan,Angela_Davies,Nell_Gabiam,Anke_Schwittay,J_Thomas_Ordonez,NA,NA,NA,NA,NA
-17,174AC,William_Simmons,Kent_Lightfoot,Stephen_Silliman,Beverly_Ortiz,Christine_Palmer,Tsim_Schneider,Kim_Christensen,NA,NA,NA,NA,NA,NA
+,Course_Number,Instructor_1,Instructor_2,Instructor_3,Instructor_4,Instructor_5,Instructor_6,Instructor_7,Instructor_8,Instructor_9,Instructor_10,Instructor_11,Instructor_12,Instructor_13,Instructor_14
+0,XB2AC,"Kim, NA, Christensen","Rob, NA, Cuthrell","Annelise, NA, Morris","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+1,XB3AC,"Gisele, NA, Bousquet","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+2,2AC,"Kent, NA, Lightfoot","Meg, NA, Conkey","Katherine, Howlett, Hayes","Andy, NA, Roddick","Lee, NA, Panich","Kim, NA, Christensen","James, NA, Flexner","John, NA, Chenoweth","Christine, NA, Hastorf","Jun, NA, Sunseri","Kristen, NA, Vacca","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+3,3AC,"Gerald, NA, Berreman","Aihwa, NA, Ong","Kevin, NA, Karpiak","Sholey, NA, Shahrokhi","Nancy, NA, ScheperHughes","Brad, NA, Erickson","Arpita, NA, Roy","M, Mather, George","James, NA, Holston","Lawrence, NA, Cohen","Charles, NA, Hirschkind","Brian, NA, Karl","Julia, NA, Morris","Stefania, NA, Pandolfo"
+4,10AC,"William, NA, Simmons","Kent, NA, Lightfoot","C, Richard, Hitchcock","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+5,XB10AC,"NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+6,11AC,"Stanley, NA, Brandes","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+7,12AC,"Gerald, NA, Berreman","Robin, Maria DeluganC12AC Kent, Lightfoot","Scott, NA, Stephens","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+8,121AC,"Laurie, NA, Wilkie","Stacy, NA, Kozakavich","Teresa, NA, Bulger","Annelise, NA, Morris","Katrina, NA, Eichner","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+9,121B,"James, NA, Deetz","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+10,124AC,"Patrick, NA, Kirch","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+11,153AC,"John, NA, Ogbu","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+12,160AC,"Charles, NA, Briggs","JoAnn, NA, Conrad","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+13,162AC,"JoAnn, Conrad and Charles, Briggs","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+14,163AC,"Alan, NA, Dundes","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+15,172,"Jack, NA, Potter","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+16,172AC,"John, NA, Ogbu","Aihwa, NA, Ong","Philippe, NA, Bourgois","Robin, Maria, Delugan","Angela, NA, Davies","Nell, NA, Gabiam","Anke, NA, Schwittay","J, Thomas, Ordonez","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"
+17,174AC,"William, NA, Simmons","Kent, NA, Lightfoot","Stephen, NA, Silliman","Beverly, NA, Ortiz","Christine, NA, Palmer","Tsim, NA, Schneider","Kim, NA, Christensen","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA","NA, NA, NA"

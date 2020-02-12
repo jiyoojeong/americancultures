@@ -1,8 +1,8 @@
 ,Course_Number,Instructor_1,Instructor_2,Instructor_3
-0,20AC,Henry_Miller,NA,NA
-1,105AC,Andrew_Scharlach,NA,NA
-2,114AC,Valerie_Edwards,NA,NA
-3,150AC,Kurt_Organista,NA,NA
-4,174AC,Wendy_WalkerMoffat,Evaon_WongKim,NA
-5,175AC,Valerie_Edwards,NA,NA
-6,185AC,Keith_Feldman,Tina_Sacks,Jonathan_Simon
+0,20AC,"Henry, NA, Miller","NA, NA, NA","NA, NA, NA"
+1,105AC,"Andrew, NA, Scharlach","NA, NA, NA","NA, NA, NA"
+2,114AC,"Valerie, NA, Edwards","NA, NA, NA","NA, NA, NA"
+3,150AC,"Kurt, NA, Organista","NA, NA, NA","NA, NA, NA"
+4,174AC,"Wendy, NA, WalkerMoffat","Evaon, NA, WongKim","NA, NA, NA"
+5,175AC,"Valerie, NA, Edwards","NA, NA, NA","NA, NA, NA"
+6,185AC,"Keith, NA, Feldman","Tina, NA, Sacks","Jonathan, NA, Simon"

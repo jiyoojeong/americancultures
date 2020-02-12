@@ -13,20 +13,62 @@ import re
 # get and clean the data.
 def access():
     # authorization
-    gc = pygsheets.authorize(service_file="/Users/jiyoojeong/Desktop/americancultures/client_secret.json")
+    gc = pygsheets.authorize(service_file="client_secret.json")
 
     file_name_1 = "AC Classes List"
     file_name_2 = 'AC Senate Data SP 2020'
 
+
+    # year access
+    with open('data/current_data_sem_year.csv', 'r', newline='') as f:
+        reader = csv.reader(f)
+        yr = next(reader)[0]
+
+    print('year:' + yr)
     # courses
     f1 = gc.open(file_name_1)
     print('---classes data accessed.')
-    wk = f1[0]
+
+    wk = f1.worksheet_by_title(yr)
+
     data = wk.get_all_values(include_tailing_empty=False, include_tailing_empty_rows=False)
     headers = data.pop(0)
-    headers = [re.sub(r'\s', '_', entry) for entry in headers]
+    # print(headers[3:])
+    headers = [re.sub(r'\s+', '_', entry) for entry in headers]
     data = reformat_values_spaces(data)
     classes = pd.DataFrame(data, columns=headers)
+    print(classes)
+    # reformatting instructor names
+    for h in headers[3:]:
+        # print(h)
+        ls = classes[h]
+        # print(ls)
+        i = 0
+        for name in ls:
+            n = name.split(' ')
+            # print('name list')
+            # print(n)
+            if len(n) <= 1:
+                # THIS IS A NO INSTRUCTOR CASE
+                # add to index 1 and 2 NA values
+                # print('no instrructorrrrrrr')
+                n = ['NA', 'NA', 'NA']
+            elif len(n) == 2:
+                # add middle name as NA
+                # print('add middle')
+                n.insert(1, 'NA')
+            elif len(n) > 3:
+                # join the middle X values into one 'middle' value
+                # print('combine middle')
+                first = n.pop(0)
+                last = n.pop()
+                middle = ' '.join(n)
+                n = [first, middle, last]
+            instructor_name = ', '.join(n)
+            # print(instructor_name)
+            classes.at[i, h] = instructor_name
+            i = i + 1
+
     print('---classes data done.')
 
     # senate
@@ -40,34 +82,55 @@ def access():
         d_rows = wk.get_all_records()
         # reformat all rows to have no spaces.
         d_rows = reformat_records_spaces(d_rows)
-        senate[re.sub(r'\s', '_', wk.title.strip())] = d_rows
+        title = wk.title.strip()
+        senate[re.sub(r'\s+', '_', title)] = d_rows
     print('---senate data done.')
     return classes, senate
 
 
 def reformat_records_spaces(l):
     new = []
+
     for dictionary_row in l:
+        count = 0
         new_d = {}
         for key in dictionary_row:
             try:
                 # print(key)
-                new_key = re.sub(r'\s', "_", key)
+                new_key = re.sub(r'\s+', "_", key)
                 # print(new_key)
             except:
                 print("key error.")
-
             val = dictionary_row.get(key)
+            if count >= 1:
+                if not pd.isna(val):
+                    if type(val) == str:
+                        val = re.sub(r'\s+', " ", val)
+                        val = val.split()
+                        if len(val) == 2:
+                            val.insert(1, 'NA')
+                        elif len(val) <= 1:
+                            val = ['NA', 'NA', 'NA']
+                        elif len(val) > 3:
+                            first = val.pop(0)
+                            last = val.pop()
+                            middle = " ".join(val)
+                            val = [first, middle, last]
 
-            if not pd.isna(val):
-                if type(val) == str:
-                    val = re.sub(r'\s', "_", val)
-                # print("value was numeric. Not a problem.")
-                # print(new_key, str(val))
-                new_d[new_key] = val
+                        val = ', '.join(val)
+                    # print("value was numeric. Not a problem.")
+                    # print(new_key, str(val))
+                    new_d[new_key] = val
+                else:
+                    new_d[new_key] = 'NA, NA, NA'
             else:
-                new_d[new_key] = 'NA'
+                try:
+                    val = re.sub(r'\s+', '_', val)
+                except:
+                    val = val
+                new_d[new_key] = val
 
+            count = count + 1
         new.append(new_d)
     return new
 
@@ -80,8 +143,8 @@ def reformat_values_spaces(l):
         for entry in row:
             # print(entry)
             if not pd.isna(entry):
-                e = re.sub(r'\s', '_', entry)
-                # print(e)
+                e = re.sub(r'^\s', '', entry)
+                e = re.sub(r'\s+', ' ', e)
             else:
                 e = "NONE"
             new_row.append(e)
@@ -132,6 +195,7 @@ dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
              'NATAMST': "NATIVE AMERICAN STUDIES",
              'PBHLTH': "PUBLIC HEALTH",
              'POLSCI': "POLITICAL SCIENCE",
+             'NUSCTX': "NUTRITIONAL SCIENCE AND TOXI...",
              'SLAVIC': "SLAVIC LANGUAGES AND LITERATURE",
              'SOCIOL': "SOCIOLOGY",
              'SOCWEL': "SOCIAL WELFARE",
@@ -140,7 +204,8 @@ dept_dict = {"AFRICAM": "AFRICAN AMERICAN STUDIES",
              'UGBA': 'BUSINESS ADMINISTRATION (UGBA)',
              'UNDERGRADUATE INTERDISCIPLINATRY STUDIES': "UNDERGRADUATE AND INTERDISCI...",
              'LS': "UNDERGRADUATE AND INTERDISCI...",
-             'PUBPOL': 'PUBLIC POLICY'
+             'PUBPOL': 'PUBLIC POLICY',
+             'COMLIT': 'COMPARATIVE LITERATURE'
              }
 
 # reformat spaces
@@ -158,9 +223,11 @@ def main():
     #  for every course in course list, get the department, cross check with the dictionary of departments
 
     # ==== PYTHON ANALYSIS ==== #
+    print(courses.columns)
     dept_names_full = courses["Department_FULL"]
     dept_names_short = courses["Department"]
-
+    print("SENATE COLUMNS")
+    print(senate.keys())
     # loop through each row, check that the instructors are on the senate list.
     for c in range(0, len(dept_names_full)):
         dept_name = dept_names_full[c]
@@ -198,21 +265,29 @@ def main():
     print("writing clean access data to csv file.")
     now = dt.datetime.now()
     # reformat column names to _ instead of " "
-    courses.columns = [c.replace(' ', '_') for c in courses.columns]
+    courses.columns = [re.sub(r'\s+', '_', c) for c in courses.columns]
+    # split up instructor names!!
 
     courses.to_csv('data/{}_{}_{}_access.csv'.format(now.year, now.month, now.day))
 
     senate_names = []
     for s in senate:
-        stitle = re.sub(r'\s', '_', s)
+        # trim edge white spaces
+        stitle = re.sub(r'^\s', '', s)
+        stitle = re.sub(r'^\s+$', '', stitle)
+
+        # replace spaces with underscores
+        stitle = re.sub(r'\s+', '_', stitle)
+        # remove all non alphanumeric/_ characters
         stitle = re.sub(r'[^_|A-Z0-9]', '', stitle)
         print(stitle)
         # cols = senate[s].keys()
         # print(cols)
-        senate_names.append(stitle)
-        d = pd.DataFrame(senate[s])
-        d.columns = [c.replace(' ', '_') for c in d.columns]
-        d.to_csv('data/senate/{}.csv'.format(stitle))
+        if senate[s]:
+            senate_names.append(stitle)
+            d = pd.DataFrame(senate[s])
+            d.columns = [c.replace(' ', '_') for c in d.columns]
+            d.to_csv('data/senate/{}.csv'.format(stitle))
     # WRITE csv of all the senate names.
     print(senate_names)
     with open('data/senate/_department_names.csv', 'w', newline='') as f:

@@ -1,7 +1,7 @@
 ,Course_Number,Instructor_1,Instructor_2,Instructor_3
-0,Spanish,NA,NA,NA
-1,135AC,Gwen_Kirkpatrick,Myrna_GarcíaCalderón,Adam_Lifshey
-2,137AC,Candace_Slater,NA,NA
-3,165AC,Jerry_Craddock,Juan_Sempere,NA
-4,Portuguese,NA,NA,NA
-5,137AC,Candace_Slater,NA,NA
+0,Spanish,"NA, NA, NA","NA, NA, NA","NA, NA, NA"
+1,135AC,"Gwen, NA, Kirkpatrick","Myrna, NA, GarcíaCalderón","Adam, NA, Lifshey"
+2,137AC,"Candace, NA, Slater","NA, NA, NA","NA, NA, NA"
+3,165AC,"Jerry, NA, Craddock","Juan, NA, Sempere","NA, NA, NA"
+4,Portuguese,"NA, NA, NA","NA, NA, NA","NA, NA, NA"
+5,137AC,"Candace, NA, Slater","NA, NA, NA","NA, NA, NA"

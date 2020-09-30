@@ -228,7 +228,7 @@ for dept in current_table:
             SELECT t.{i}
             FROM TEMP_{d} as t
         '''.format(d=dept[0], i=inst)
-        cur.execute(query)
+        cur.execute(query)  
 
         # print out list of first and last of instructors teaching dept/courses on senate list
         # print(cur.execute('''select * from {d}_fl'''.format(d=dept[0])).fetchall())
@@ -251,12 +251,13 @@ for dept in current_table:
         '''.format(d=dept[0], s=senate_collapsed)
 
 
-        THeres something wrong with not comparing the second instructor. Need to adjust so that
-        the query loop from inst in course columns limited also checks the second instructor when Not 'nanana' and
-        removes those not approved from the approved list
+        #THeres something wrong with not comparing the second instructor. Need to adjust so that
+        #the query loop from inst in course columns limited also checks the second instructor when Not 'nanana' and
+        #removes those not approved from the approved list
 
-        this should be done by comparing if its instructor_1 or not
-        if not instructor one, we do the same comparison but we remove from A_{} rather than adding to it at the end.
+        #this should be done by comparing if its instructor_1 or not
+        #if not instructor one, we do the same comparison but we remove from A_{} rather than adding to it at the end.
+
         cur.execute(query, (senate_call_cat, senate_call_cat))
 
         fetch = cur.execute(
@@ -288,7 +289,6 @@ for dept in current_table:
             print(fetch)
         else:
             continue
-
 
         # TEMP_{d} is a table with only approved instructors
         cur.execute('''SELECT * FROM TEMP_{d} INNER JOIN A_{d};'''.format(d=dept[0]))

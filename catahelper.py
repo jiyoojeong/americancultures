@@ -1,8 +1,7 @@
-import pandas as pd
+from installs import import_or_install as iori
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
-
 
 # takes in url, outputs arrays courses[dept, course number], instructors[], and string year-semester
 def main(url):
@@ -10,8 +9,8 @@ def main(url):
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
-    options.add_argument('--headless')
-    driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver", options=options)
+    #options.add_argument('--headless')
+    driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver85", options=options)
 
     driver.get(url)
     test_a = driver.find_element_by_class_name("ls-instructors")
@@ -80,8 +79,8 @@ def main(url):
                 except:
                     ls = [b.replace('\n', '')]
                 instructor_list.append(ls)
-    # print("~~~~~~~~~~ INSTRUCTOR LIST ~~~~~~~~")
-    # print(instructor_list)
+    #print("~~~~~~~~~~ INSTRUCTOR LIST ~~~~~~~~")
+    #print(instructor_list)
     # print(section)
 
     courses = []

@@ -3,6 +3,7 @@ import new_url
 import senate_data
 import schedule
 import time
+import os
 
 
 def main():
@@ -10,12 +11,12 @@ def main():
     print("I'm working...")
     new_url.main()
     print("finished 1")
-    courses.main()
+    os.system('python courses.py')
     senate_data.main()
     print("finished updating.")
 
 
-schedule.every().day.at("6:00").do(main)
+schedule.every().day.at("06:00").do(main)
 
 while True:
     schedule.run_pending()

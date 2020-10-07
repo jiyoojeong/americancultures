@@ -12,12 +12,13 @@ def main():
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
     driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver85", options=options)
 
     driver.get("https://classes.berkeley.edu/search/class/")
 
-    ac_button = driver.find_element_by_css_selector("#facetapi-link--8775")
+    #ac_button = driver.find_element_by_css_selector("#facetapi-link--8775")
+    ac_button = driver.find_element_by_css_selector("#facetapi-link--8786")
     ac_button.click()
 
     #print("ac button clicked")

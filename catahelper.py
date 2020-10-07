@@ -3,17 +3,18 @@ from installs import import_or_install as iori
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+
 # takes in url, outputs arrays courses[dept, course number], instructors[], and string year-semester
 def main(url):
     # setting up webscraping driver
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
     driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver85", options=options)
 
     driver.get(url)
-    test_a = driver.find_element_by_class_name("ls-instructors")
+    #test_a = driver.find_element_by_class_name("ls-instructors")
 
     # Beautiful Souping - finding components on page, stripping jQuery, java, html, etc.
     soup = BeautifulSoup(driver.page_source, "lxml")
@@ -24,20 +25,23 @@ def main(url):
     # print(yr)
 
     # instructors
-
-    names_list = soup.findAll("div", "ls-instructors")
-    instructor_list = []
-    for t in names_list:
-        # print("-----new t------")
-        r = t.findAll("span")
-        inst = []
-        for x in r:
-            x = x.get_text()
-            if not x == '':
-                # print(x)
-                inst.append(x)
-        instructor_list.append(inst)
-    # instructor_list = [list(t) for t in set(tuple(element) for element in instructor_list)]
+    try:
+        names_list = soup.findAll("div", "ls-instructors")
+        instructor_list = []
+        for t in names_list:
+            # print("-----new t------")
+            r = t.findAll("span")
+            inst = []
+            for x in r:
+                x = x.get_text()
+                if not x == '':
+                    # print(x)
+                    inst.append(x)
+            instructor_list.append(inst)
+        # instructor_list = [list(t) for t in set(tuple(element) for element in instructor_list)]
+    except Exception:
+        print("no instructors on this page.")
+        instructor_list = []
 
     # organizing courses from a page
     classes_list = soup.findAll("span", "ls-section-name")

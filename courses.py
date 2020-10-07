@@ -18,7 +18,7 @@ gc = pygsheets.authorize(service_file="client_secret.json")
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--incognito')
-#options.add_argument('--headless')
+options.add_argument('--headless')
 driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver85", options=options)
 
 #main_url = "https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A1174&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures"

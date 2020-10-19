@@ -10,7 +10,7 @@ def main():
     # run downloads
     print("I'm working...")
     new_url.main()
-    print("finished 1")
+    # print("finished 1")
     os.system('python courses.py')
     senate_data.main()
     print("finished updating.")

@@ -13,7 +13,7 @@ def main():
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
     options.add_argument('--headless')
-    driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver85", options=options)
+    driver = webdriver.Chrome("chromedriver85", options=options)
 
     driver.get("https://classes.berkeley.edu/search/class/")
 

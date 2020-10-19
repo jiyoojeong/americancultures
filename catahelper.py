@@ -11,7 +11,7 @@ def main(url):
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
     options.add_argument('--headless')
-    driver = webdriver.Chrome("/Users/jiyoojeong/Downloads/chromedriver85", options=options)
+    driver = webdriver.Chrome("chromedriver85", options=options)
 
     driver.get(url)
     #test_a = driver.find_element_by_class_name("ls-instructors")

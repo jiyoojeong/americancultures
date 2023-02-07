@@ -1,7 +1,7 @@
 import courses
 import new_url
 import senate_data
-import schedule
+#import schedule
 import time
 import os
 
@@ -9,10 +9,10 @@ import os
 def main():
     # run downloads
     print("I'm working...")
-    new_url.main()
+    #new_url.main()
     # print("finished 1")
     os.system('python courses.py')
-    senate_data.main()
+    #senate_data.main()
     print("finished updating.")
 
 

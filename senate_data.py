@@ -109,6 +109,8 @@ def clean(d):
             p = separate(s1, col)
             profs.append(p)  # all the profs approved for one course
     df = pd.DataFrame(list(zip(col, profs)), columns=['Class', 'instructors'])
+
+    print(df)
     return df  # return the column binded values of col and prof as a data frame
 
 

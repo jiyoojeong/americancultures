@@ -25,24 +25,25 @@ def main():
     #driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver109", options=options)
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-    driver.get("https://classes.berkeley.edu/search/class/")
+    driver.get("https://classes.berkeley.edu/search/class/?f%5B0%5D=sm_general_requirement%3AAmerican%20Cultures") # all AC courses.
     time.sleep(1)
     #ac_button = driver.find_element_by_css_selector("#facetapi-link--8775")
-    ac_button = driver.find_element_by_css_selector("#facetapi-link--9177")
+    #ac_button = driver.find_element("css-selector", "#facetapi-link--9177")
     #xpath = '//*[@id="facetapi-link--9177"]'
-    ac_button.click()
+    #ac_button.click()
 
     #print("ac button clicked")
 
     time.sleep(5)
 
-    term_button = driver.find_element_by_xpath('//*[@id="term_29"]')
-    '//*[@id="facetapi-link--9267"]'
+    term_button = driver.find_element("xpath", '//*[@name="term_select"][@tabindex=1]')
+    #'//*[@id="facetapi-link--9267"]'
 
     term_button.click()
     #print("term button clicked")
 
-    ok_button = driver.find_element_by_css_selector("body > div.alertify.ajs-pulse > div.ajs-modal > div > div.ajs-footer > div.ajs-primary.ajs-buttons > button.ajs-button.ajs-cancel")
+    ok_button = driver.find_element("xpath", "/html/body/div[2]/div[2]/div/div[4]/div[2]/button[2]")
+    #driver.find_element_by_xpath
     ok_button.click()
     time.sleep(5)
 

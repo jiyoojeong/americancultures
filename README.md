@@ -14,3 +14,8 @@ Find the finalized spreadsheet [AC Classes List](https://docs.google.com/spreads
 
 SETUP:
 - <code>pip install -r requirements.txt</code>
+- Running the courses code:
+    1. move to the directory the code files are in via terminal
+    2. get new (most current term's) url: <code>python3 new_url.py</code>
+    3. copy paste this new_url into the variable <code>main_url</code> on line 52 of courses.py.
+    4. run scraping for classes.berkeley.edu: <code>python3 courses.py</code> 

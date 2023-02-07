@@ -10,3 +10,6 @@ This software consists of several main parts:
 
 
 Find the finalized spreadsheet [here](https://docs.google.com/spreadsheets/d/1hop5bnRhSSfG0EK7A8X1D5y1tmvegWcTp_m5w8esDz8/edit?usp=sharing)
+
+SETUP:
+- <code>pip install -r requirements.txt</code>

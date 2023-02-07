@@ -57,7 +57,7 @@ page_number = 2
 
 while True:
     try:
-        link = driver.find_element_by_link_text(str(page_number))
+        link = driver.find_element("link text", str(page_number))
     except NoSuchElementException:
         break
     link.click()
@@ -80,7 +80,7 @@ print("TERM:", yr)
 yrs = []
 
 # open the sheet
-file = gc.open('AC Classes List')
+file = gc.open('AC Classes List') # GOOGLE LINK HERE: https://docs.google.com/spreadsheets/d/1hop5bnRhSSfG0EK7A8X1D5y1tmvegWcTp_m5w8esDz8/edit#gid=1639877394 
 sheet = file[0]  # selects the first sheet
 
 

@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-import catahelper
+import catahelper2 as catahelper
 import pygsheets
 import csv
 import time

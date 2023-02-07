@@ -15,11 +15,15 @@ import time
 
 # set up webdriver
 def main():
-    options = webdriver.ChromeOptions()
+    
+    # set up webdriver
+    options = Options()
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
-    #options.add_argument('--headless')
-    driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver94", options=options)
+    options.add_argument('--headless')
+
+    #driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver109", options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     driver.get("https://classes.berkeley.edu/search/class/")
     time.sleep(1)

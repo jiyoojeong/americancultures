@@ -97,7 +97,7 @@ def write_new_sheet(year):
     data_dict = {"Department": [i[0] for i in courses_split], "Course Number": [i[1] for i in courses_split],
                  "Instructors": instructor_list, "instruction_mode": instruction_mode}
     
-    enrollment_df = pd.DataFrame(enrollement_dat)
+    enrollment_df = pd.DataFrame(enrollment_dat)
     # print("dept:" + " len = " + str(len(data_dict["Department"])) + " " + str(data_dict["Department"]))
     # print("numb:" + " len = " + str(len(data_dict["Course Number"])) + " " + str(data_dict["Course Number"]))
     # print("inst:" + " len = " + str(len(data_dict["Instructors"])) + " " + str(data_dict["Instructors"]))

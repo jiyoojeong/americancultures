@@ -1,7 +1,9 @@
 import new_url
 import pandas as pd
 from bs4 import BeautifulSoup
+
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import NoSuchElementException
 from installs import import_or_install as iori
 import lxml
@@ -30,7 +32,7 @@ options.add_argument('--incognito')
 options.add_argument('--headless')
 
 #driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver109", options=options)
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 # main_url = "https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A1174&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures"
 # main_url = "https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A1961&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures"
@@ -50,8 +52,8 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2587&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' # FALL 2022
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2729&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' #SPRING 2023
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2801&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' #SUMMER 23
-#main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2870&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' # FALL 23
-main_url = '' # INSERT URL HERE.
+main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2870&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' # FALL 23
+#main_url = '' # INSERT URL HERE.
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2801&f%5B1%5D=ts_course_level%3Aup&f%5B2%5D=ts_course_level%3Alow' # all summer 23 courses, not just AC.
 driver.get(main_url)
 urls = {'1': main_url} 

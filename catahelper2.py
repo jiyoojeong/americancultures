@@ -28,7 +28,7 @@ def main(url, driver=None):
     #driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver109", options=options)
     #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     if driver==None:
-        driver = webdriver.Chrome(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     driver.get(url)
     #test_a = driver.find_element_by_class_name("ls-instructors")
@@ -235,6 +235,7 @@ def main(url, driver=None):
         driver.get(rt+path)
         course_links.append(rt + path)
         try:
+            #cel = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div')))
             celement = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div')))
             seat_info = process_class_enrollment(celement)
             
@@ -246,7 +247,7 @@ def main(url, driver=None):
                     seat_info = process_class_enrollment(celement)
                 except:
                     print(celement.text.split('\n'))
-            except:
+            except TimeoutException:
                 seat_info = {"Total Open Seats": None, "Enrolled": None, "Waitlisted": None,
                          "Capacity": None, "Waitlist Max": None, "Open Reserved Seats": None}
         
@@ -265,7 +266,7 @@ def main(url, driver=None):
 def process_class_enrollment(elem):
     course_enrollment = elem.text #driver.find_element_by_xpath('/html/body/div[1]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div').get_text #soup.find("div", "section-details")
     course_enrollment_list = course_enrollment.split('\n')
-    #print(course_enrollment_list)
+    print(course_enrollment_list)
     if "Consent of instructor required for enrollment." in course_enrollment_list:
         course_enrollment_list.remove("Consent of instructor required for enrollment.")
         #print('removed consent line.')

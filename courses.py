@@ -49,7 +49,10 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=sm_general_requirement%3AAmerican%20Cultures&f%5B1%5D=im_field_term_name%3A2538' # SPRING 2022
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2587&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' # FALL 2022
 #main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2729&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' #SPRING 2023
-main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2801&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures'
+#main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2801&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' #SUMMER 23
+#main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2870&f%5B1%5D=sm_general_requirement%3AAmerican%20Cultures' # FALL 23
+main_url = '' # INSERT URL HERE.
+#main_url = 'https://classes.berkeley.edu/search/class/?f%5B0%5D=im_field_term_name%3A2801&f%5B1%5D=ts_course_level%3Aup&f%5B2%5D=ts_course_level%3Alow' # all summer 23 courses, not just AC.
 driver.get(main_url)
 urls = {'1': main_url} 
 
@@ -76,6 +79,7 @@ course_links = []
 soup = BeautifulSoup(driver.page_source, "lxml")
 yr = soup.find("div", "ls-term-year")
 yr = yr.get_text()
+yr = yr #+ "_ALL"
 print("TERM:", yr)
 yrs = []
 
@@ -166,6 +170,7 @@ with open('data/current_data_sem_year.csv', 'w') as f:
 print("process completed.")
 
 try:
+    
     sheet = file.add_worksheet(yr)
     sheet.set_dataframe(write_sheet(yr), (1, 1))
 except:

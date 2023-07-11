@@ -23,7 +23,7 @@ def main():
     options.add_argument('--headless')
 
     #driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver109", options=options)
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     driver.get("https://classes.berkeley.edu/search/class/?f%5B0%5D=sm_general_requirement%3AAmerican%20Cultures") # all AC courses.
     time.sleep(1)

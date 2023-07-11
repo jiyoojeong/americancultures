@@ -6,6 +6,7 @@ import lxml
 import numpy as np
 
 find_instr_mode = True
+import time
 # update chromedriver automagically
 
 from selenium.webdriver.chrome.service import Service
@@ -236,21 +237,33 @@ def main(url, driver=None):
         course_links.append(rt + path)
         try:
             #cel = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div')))
+            #                                                                               '/html/body/div[2]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div'
+            time.sleep(2)
+            #test = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div')
+            #print(test.text)
             celement = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div')))
+            #print(celement.text)
             seat_info = process_class_enrollment(celement)
-            
+            #print('worked1')
         except TimeoutException:
             try:
                 celement = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[1]/div/div[3]/section[1]/div')))
-                
-                try:
-                    seat_info = process_class_enrollment(celement)
-                except:
-                    print(celement.text.split('\n'))
+                seat_info = process_class_enrollment(celement)
+             
             except TimeoutException:
-                seat_info = {"Total Open Seats": None, "Enrolled": None, "Waitlisted": None,
+                try:
+                    test = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/main/div/div/div[1]/div/div[2]/section[1]/div')
+                    seat_info = process_class_enrollment(test)
+                    #print('worked3')
+                except:
+                    try:
+                        test = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/main/div/div/div[1]/div/div[3]/section[1]/div')
+                        seat_info = process_class_enrollment(test)
+                        #print('worked4')
+                    except:
+                        seat_info = {"Total Open Seats": None, "Enrolled": None, "Waitlisted": None,
                          "Capacity": None, "Waitlist Max": None, "Open Reserved Seats": None}
-        
+    
         #print(seat_info)
         enrollment_dat.append(seat_info)
         #print('ce', course_enrollment)

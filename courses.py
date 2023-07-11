@@ -29,7 +29,7 @@ gc = pygsheets.authorize(service_file="client_secret.json")
 options = Options()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--incognito')
-options.add_argument('--headless')
+#options.add_argument('--headless')
 
 #driver = webdriver.Chrome("/Users/jiyoojeong/Desktop/C/americancultures/chromedriver109", options=options)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)

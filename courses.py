@@ -171,8 +171,7 @@ with open('data/current_data_sem_year.csv', 'w') as f:
     writer.writerow([yr])
 print("process completed.")
 
-try:
-    
+try: 
     sheet = file.add_worksheet(yr)
     sheet.set_dataframe(write_sheet(yr), (1, 1))
 except:
@@ -180,6 +179,7 @@ except:
     sheet = file.worksheet_by_title(yr)
     sheet.clear()
     sheet.set_dataframe(write_sheet(yr), (1, 1))
+    print('URL OF SHEET:', sheet.url)
     #print(sheet)
 
 driver.quit()

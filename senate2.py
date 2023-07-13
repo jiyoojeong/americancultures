@@ -59,7 +59,7 @@ def scrape(res):
         if dept_name in ALIAS.keys():
             dept_name = ALIAS[dept_name]
         if '-' and 'see' in dept_name:
-            # to nothing
+            # todo: nothing
             dept_stripped = dept_stripped
         else:
             dept_stripped.append(dept_name)
@@ -83,35 +83,19 @@ def scrape(res):
 def clean(d):
     s = d.get_text()
     print("original s: " + s)
-    
-    '''
-    # typos from the past. As of July 13, 2023 - these typos don't exist.
-    # adjust Kathy Abrams.
-    if s.find("m133AC") != -1:
-        print('changing err')
-        s = re.sub(r'm133AC', 'm\n133AC', s)
-        print(s)
-    # adjust Karina Palau and Carol Sholl
-    if s.find("lW60AC") != -1:
-        print('changing err')
-        s = re.sub(r'lW60AC', 'l\nW60AC', s)
-        print(s)'''
-
-
-    # remove all parenthetical notes.
-    notes = re.sub('\(([^\)]+)\)', '', s)
-    print(notes)
-    s = re.sub(r'\(.+\)', '', s)
+        
     # remove &nbsp; chars.
     s = re.sub(r'\u00A0', ' ', s)
     # substitute all bullets as 'NEXT' for easily identifying instructor passage.
     s = re.sub(r'[•]', 'NEXT', s)
     # use regex to remove all non-alpha numeric numbers and replace them with the empty string.
-    s = re.sub(r'[^\s a-zA-Z0-9áéèíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ]', '', s)
+    s = re.sub(r'[^\s\-\(\)\'a-zA-Z0-9áéèíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇñ]', '', s)
+    # normalize accents
+    s = unidecode(s)
     # whitespace reformatting
     s = re.sub(' +', ' ', s)
 
-    print("regex clean done" + s)
+    print("regex clean done:\n" + s)
 
     col = []
     profs = []
@@ -120,13 +104,16 @@ def clean(d):
         # pops off first approved course list off of department as s1
         s1 = s[0:s.index("\n")]  # everything before the enter
         s = s[s.index("\n") + 1:]  # everything after the enter
-        # print("----s1----")
-        # print(s1)
-        # print("----s2----")
-        # print(s)
+        print("----s1----")
+        print(s1)
+        print("----s2----")
+        print(s)
+
         if s1:
             p = separate(s1, col)
             profs.append(p)  # all the profs approved for one course
+            
+        
     
     expanded = []
     for course, ls_profs in  list(zip(col, profs)):
@@ -143,6 +130,10 @@ def clean(d):
 def separate(bits, c):
     # make an array of professors approved
     p = []
+    # remove all parenthetical notes.
+    #notes = re.sub('\(([^\)]+)\)', '', bits)
+    #print('NOTES:', notes)
+    #bits = re.sub(r'\(.+\)', '', bits)
     try:
         course_no = bits[0:bits.index(" ")]
         print("c# " + course_no)

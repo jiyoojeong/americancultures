@@ -8,6 +8,7 @@ import time as time
 from datetime import date
 import signal
 import re
+from unidecode import unidecode
 
 ALIAS = {
     "Test": None
@@ -82,6 +83,9 @@ def scrape(res):
 def clean(d):
     s = d.get_text()
     print("original s: " + s)
+    
+    '''
+    # typos from the past. As of July 13, 2023 - these typos don't exist.
     # adjust Kathy Abrams.
     if s.find("m133AC") != -1:
         print('changing err')
@@ -91,10 +95,12 @@ def clean(d):
     if s.find("lW60AC") != -1:
         print('changing err')
         s = re.sub(r'lW60AC', 'l\nW60AC', s)
-        print(s)
+        print(s)'''
 
 
     # remove all parenthetical notes.
+    notes = re.sub('\(([^\)]+)\)', '', s)
+    print(notes)
     s = re.sub(r'\(.+\)', '', s)
     # remove &nbsp; chars.
     s = re.sub(r'\u00A0', ' ', s)
